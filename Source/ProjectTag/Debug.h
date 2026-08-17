@@ -3,6 +3,8 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "ProjectTag/Characters/PlayerCharacter.h"
+#include "Components/CapsuleComponent.h"
 #include "Kismet/KismetSystemLibrary.h"
 
 namespace Debug
@@ -55,6 +57,19 @@ namespace Debug
 		);
 	}
 	
+	static void OneSlot_Bool(const UWorld* InWorld, const FName Title, const bool Value, const float Duration = -1.f, const FColor Color = FColor::MakeRandomColor(), const bool bLog = true)
+	{
+		UKismetSystemLibrary::PrintString(
+			InWorld, 
+			FString::Printf(TEXT("%s: %s"), *Title.ToString(), *FString(Value? "true": "false")),
+			true, 
+			bLog,
+			Color, 
+			Duration, 
+			Title
+		);
+	}
+	
 	static void OneSlot_Float(const UWorld* InWorld, const FName Title, const float Value, const float Duration = -1.f, const FColor Color = FColor::MakeRandomColor(), const bool bLog = true)
 	{
 		UKismetSystemLibrary::PrintString(
@@ -81,12 +96,30 @@ namespace Debug
 		);
 	}
 	
-	template<typename UEnum>
-	static void OneSlot_Enum(const UWorld* InWorld, const FName Title, const UEnum Value, const float Duration = -1.f, const FColor Color = FColor::MakeRandomColor(), const bool bLog = true)
+	template<typename TEnum>
+	static void OneSlot_Enum(const UWorld* InWorld, const FName Title, const TEnum Value, const float Duration = -1.f, const FColor Color = FColor::MakeRandomColor(), const bool bLog = true)
+	{
+		static_assert(TIsEnum<TEnum>::Value, "OneSlot_Enum requires an enum type");
+		const UEnum* EnumPtr = StaticEnum<TEnum>();
+		check(EnumPtr);
+
+		const FString EnumString = EnumPtr->GetNameStringByValue(static_cast<int64>(Value));
+		UKismetSystemLibrary::PrintString(
+			InWorld, 
+			FString::Printf(TEXT("%s: %s"), *Title.ToString(), *EnumString),
+			true, 
+			bLog,
+			Color, 
+			Duration, 
+			Title
+		);
+	}
+	
+	static void OneSlot_Vector(const UWorld* InWorld, const FName Title, const FVector Value, const float Duration = -1.f, const FColor Color = FColor::MakeRandomColor(), const bool bLog = true)
 	{
 		UKismetSystemLibrary::PrintString(
 			InWorld, 
-			FString::Printf(TEXT("%s: %s"), *Title.ToString(), *FString::Printf(TEXT("%s"), *UEnum::GetValueAsString(Value))),
+			FString::Printf(TEXT("%s: %s"), *Title.ToString(), *Value.ToCompactString()),
 			true, 
 			bLog,
 			Color, 
@@ -157,7 +190,7 @@ namespace Debug
 		);
 	}
 	
-	static void DrawArrow(const UWorld* InWorld, const FVector& LineStart, const FVector& LineEnd, const float ArrowSize = 1.f, const FColor& Color = FColor::MakeRandomColor(), const bool bPersistentLines = false, const float LifeTime = -1.f, const float Thickness = 1.f, const int32 DepthPriority = 0)
+	static void DrawArrow(const UWorld* InWorld, const FVector& LineStart, const FVector& LineEnd, const float Thickness = 1.f,const FColor& Color = FColor::MakeRandomColor(), const bool bPersistentLines = false, const float LifeTime = -1.f,const float ArrowSize = 1.f, const int32 DepthPriority = 0)
 	{
 		DrawDebugDirectionalArrow(
 			InWorld,
@@ -172,7 +205,7 @@ namespace Debug
 		);
 	}
 	
-	static void DrawString(const UWorld* InWorld, const FVector& TextLocation, const FString& Text, const float FontScale = 1.f, const FColor& Color = FColor::MakeRandomColor(), const bool bPersistentLines = false, const float LifeTime = -1.f, const int32 DepthPriority = 0)
+	static void DrawString(const UWorld* InWorld, const FVector& TextLocation, const FString& Text, const float FontScale = 1.f, const FColor& Color = FColor::MakeRandomColor(), const bool bPersistentLines = false, const float LifeTime = 0.f, const int32 DepthPriority = 0)
 	{
 		DrawDebugString(
 			InWorld,
@@ -186,4 +219,36 @@ namespace Debug
 		);
 	}
 #pragma endregion Draw Debugs
+	
+#pragma region Character Referenced Debug
+	static void DrawStringFromCharacter(const UWorld* InWorld, const ACharacter* Character,const FString Value, const FColor Color, const float OffSet)
+	{
+		if (!Character)	{return;}
+		const float HalfHeight = Character->GetCapsuleComponent()->GetScaledCapsuleHalfHeight();
+		const FVector Location = Character->GetActorLocation() + FVector{0.f,0.f,HalfHeight+OffSet};
+		Debug::DrawString(InWorld, Location, Value, 0.75f, Color);
+	}
+
+	static void DrawArrowFromCharacter(const UWorld* InWorld, const APlayerCharacter* Character,const FString Name,const FVector Value, const float MaxValue, const FColor Color)
+	{
+		if (!Character)	{return;}
+		const float HalfHeight = Character->GetCapsuleComponent()->GetScaledCapsuleHalfHeight();
+		const FVector StartLocation = Character->GetActorLocation() - FVector{0.f,0.f,HalfHeight};
+		const float ValueMagnitude = Value.Size();
+
+		const float ArrowLength = FMath::GetMappedRangeValueClamped(
+			FVector2D(0.f, MaxValue),
+			FVector2D(0.f, Character->DebugOptions.DebugArrowLength),
+			ValueMagnitude
+		);
+
+		const FVector Direction = Value.GetSafeNormal();
+		const FVector EndLocation =
+			StartLocation + Direction * ArrowLength;
+	
+		Debug::DrawString(InWorld, EndLocation, Name, 0.75f, Color);
+		Debug::DrawArrow(InWorld, StartLocation, EndLocation,3.f,Color);
+	}
+	
+#pragma endregion Character Referenced Debug
 }

@@ -45,6 +45,10 @@
 		{
 			"Name": "GameplayAbilities",
 			"Enabled": true
+		},
+		{
+			"Name": "MotionTrajectory",
+			"Enabled": true
 		}
 	]
 }

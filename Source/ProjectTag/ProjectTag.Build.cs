@@ -18,6 +18,8 @@ public class ProjectTag : ModuleRules
 			"GameplayTasks",
 			"GameplayTags",
 			"MotionWarping",
+			"MotionTrajectory",
+			"Chooser",
 		});
 
 		PrivateDependencyModuleNames.AddRange(new string[] {  });
