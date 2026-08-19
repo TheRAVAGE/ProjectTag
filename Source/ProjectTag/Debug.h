@@ -130,6 +130,100 @@ namespace Debug
 	
 #pragma endregion One Slot Debugs
 	
+#pragma region One Slot Debugs Multiplayer
+	
+	static void OneSlotM_String(const UWorld* InWorld, const FName Title, const FString Message, const float Duration = -1.f, const FColor Color = FColor::MakeRandomColor(), const bool bLog = true)
+	{
+		FName NewTitle = FName(FString::Printf(TEXT("%d - %s"),InWorld->GetUniqueID(),*Title.ToString()));
+		UKismetSystemLibrary::PrintString(
+			InWorld, 
+			FString::Printf(TEXT("%s: %s"), *Title.ToString(), *Message),
+			true, 
+			bLog,
+			Color, 
+			Duration, 
+			NewTitle
+		);
+	}
+	
+	static void OneSlotM_Bool(const UWorld* InWorld, const FName Title, const bool Value, const float Duration = -1.f, const FColor Color = FColor::MakeRandomColor(), const bool bLog = true)
+	{
+		FName NewTitle = FName(FString::Printf(TEXT("%d - %s"),InWorld->GetUniqueID(),*Title.ToString()));
+		UKismetSystemLibrary::PrintString(
+			InWorld, 
+			FString::Printf(TEXT("%s: %s"), *Title.ToString(), *FString(Value? "true": "false")),
+			true, 
+			bLog,
+			Color, 
+			Duration, 
+			NewTitle
+		);
+	}
+	
+	static void OneSlotM_Float(const UWorld* InWorld, const FName Title, const float Value, const float Duration = -1.f, const FColor Color = FColor::MakeRandomColor(), const bool bLog = true)
+	{
+		FName NewTitle = FName(FString::Printf(TEXT("%d - %s"),InWorld->GetUniqueID(),*Title.ToString()));
+		UKismetSystemLibrary::PrintString(
+			InWorld, 
+			FString::Printf(TEXT("%s: %f"), *Title.ToString(), Value),
+			true, 
+			bLog,
+			Color, 
+			Duration, 
+			NewTitle
+		);
+	}
+	
+	static void OneSlotM_Int(const UWorld* InWorld, const FName Title, const int32 Value, const float Duration = -1.f, const FColor Color = FColor::MakeRandomColor(), const bool bLog = true)
+	{
+		FName NewTitle = FName(FString::Printf(TEXT("%d - %s"),InWorld->GetUniqueID(),*Title.ToString()));
+		UKismetSystemLibrary::PrintString(
+			InWorld, 
+			FString::Printf(TEXT("%s: %d"), *Title.ToString(), Value),
+			true, 
+			bLog,
+			Color, 
+			Duration, 
+			NewTitle
+		);
+	}
+	
+	template<typename TEnum>
+	static void OneSlotM_Enum(const UWorld* InWorld, const FName Title, const TEnum Value, const float Duration = -1.f, const FColor Color = FColor::MakeRandomColor(), const bool bLog = true)
+	{
+		static_assert(TIsEnum<TEnum>::Value, "OneSlot_Enum requires an enum type");
+		const UEnum* EnumPtr = StaticEnum<TEnum>();
+		check(EnumPtr);
+
+		FName NewTitle = FName(FString::Printf(TEXT("%d - %s"),InWorld->GetUniqueID(),*Title.ToString()));
+		const FString EnumString = EnumPtr->GetNameStringByValue(static_cast<int64>(Value));
+		UKismetSystemLibrary::PrintString(
+			InWorld, 
+			FString::Printf(TEXT("%s: %s"), *Title.ToString(), *EnumString),
+			true, 
+			bLog,
+			Color, 
+			Duration, 
+			NewTitle
+		);
+	}
+	
+	static void OneSlotM_Vector(const UWorld* InWorld, const FName Title, const FVector Value, const float Duration = -1.f, const FColor Color = FColor::MakeRandomColor(), const bool bLog = true)
+	{
+		FName NewTitle = FName(FString::Printf(TEXT("%d - %s"),InWorld->GetUniqueID(),*Title.ToString()));
+		UKismetSystemLibrary::PrintString(
+			InWorld, 
+			FString::Printf(TEXT("%s: %s"), *Title.ToString(), *Value.ToCompactString()),
+			true, 
+			bLog,
+			Color, 
+			Duration, 
+			NewTitle
+		);
+	}
+	
+#pragma endregion One Slot Debugs Multiplayer
+	
 #pragma region Draw Debugs
 	
 	static void DrawLine(const UWorld* InWorld, const FVector& LineStart, const FVector& LineEnd, const FColor& Color = FColor::MakeRandomColor(), const bool bPersistentLines = false, const float LifeTime = -1.f, const float Thickness = 1.f, const int32 DepthPriority = 0)

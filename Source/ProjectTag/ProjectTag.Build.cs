@@ -20,6 +20,7 @@ public class ProjectTag : ModuleRules
 			"MotionWarping",
 			"MotionTrajectory",
 			"Chooser",
+			"PoseSearch",
 		});
 
 		PrivateDependencyModuleNames.AddRange(new string[] {  });

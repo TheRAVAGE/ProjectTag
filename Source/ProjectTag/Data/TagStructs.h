@@ -12,14 +12,28 @@ enum class EMovementGait : uint8;
 #pragma region Player Settings
 
 USTRUCT(BlueprintType)
-struct FPlayerMovementSettings
+struct FPlayerMovementControlSettings
 {
 	GENERATED_BODY()
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Settings | Movement")
 	bool bIsRunToggle{false};
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Settings | Movement")
+	bool bIsWalkToggle{false};
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Settings | Movement")
 	bool bIsCrouchToggle{false};
+};
+
+USTRUCT(BlueprintType)
+struct FPlayerLookControlSettings
+{
+	GENERATED_BODY()
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Settings | Look")
+	float LookSensitivity{1.0f};
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Settings | Look")
+	bool bIsLookInverted{false};
 };
 
 #pragma endregion Player Settings
@@ -85,12 +99,19 @@ struct FAnimationProperties
 	UPROPERTY(BlueprintReadOnly, Category="Animation Properties | Speed Data")
 	bool bIsAccelerating{false};
 	
+	UPROPERTY(BlueprintReadOnly, Category="Animation Properties | Speed Data")
+	bool bIsFalling{false};
+	
 	//Gait Data
 	UPROPERTY(BlueprintReadOnly, Category="Animation Properties | Gait Data")
 	EMovementGait MovementGait{EMovementGait::E_Idle};
 	//Stance Data
 	UPROPERTY(BlueprintReadOnly, Category="Animation Properties | Gait Data")
 	EMovementStance MovementStance{EMovementStance::E_None};
+	
+	//Foot Placement
+	UPROPERTY(BlueprintReadOnly, Category="Animation Properties | Foot Placement")
+	float FootPlacementAlpha{0.0f};
 };
 
 #pragma endregion Movement Values

@@ -14,6 +14,7 @@ enum class EMovementGait : uint8
 	E_Idle UMETA(DisplayName = "Idle"),
 	E_Walking UMETA(DisplayName = "Walking"),
 	E_Running UMETA(DisplayName = "Running"),
+	E_Sprinting UMETA(DisplayName = "Sprinting"),
 	E_Crouching UMETA(DisplayName = "Crouching"),
 	E_Sliding UMETA(DisplayName = "Sliding"),
 	E_Traversal UMETA(DisplayName = "Traversal"),
