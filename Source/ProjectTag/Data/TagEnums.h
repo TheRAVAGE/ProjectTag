@@ -18,6 +18,7 @@ enum class EMovementGait : uint8
 	E_Crouching UMETA(DisplayName = "Crouching"),
 	E_Sliding UMETA(DisplayName = "Sliding"),
 	E_Traversal UMETA(DisplayName = "Traversal"),
+	E_Falliing UMETA(DisplayName = "Falling"),
 	E_MAX UMETA(Hidden)
 };
 

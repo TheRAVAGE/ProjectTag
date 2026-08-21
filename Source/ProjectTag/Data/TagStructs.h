@@ -105,6 +105,8 @@ struct FAnimationProperties
 	//Gait Data
 	UPROPERTY(BlueprintReadOnly, Category="Animation Properties | Gait Data")
 	EMovementGait MovementGait{EMovementGait::E_Idle};
+	UPROPERTY(BlueprintReadOnly, Category="Animation Properties | Gait Data")
+	EMovementGait PreviousMovementGait{EMovementGait::E_Idle};
 	//Stance Data
 	UPROPERTY(BlueprintReadOnly, Category="Animation Properties | Gait Data")
 	EMovementStance MovementStance{EMovementStance::E_None};
@@ -124,11 +126,17 @@ struct FDebugOptions
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Debug")
 	bool bShowDebugMessages{false};
 	
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Debug")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Debug | Locomotion")
+	bool bShowControlsData{false};
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Debug | Locomotion")
 	bool bShowCharacterLocomotionData{false};
 	
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Debug")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Debug | Locomotion")
 	bool bShowCharacterLocomotionVisuals{false};
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Debug | Transition")
+	bool bShowTransitionBlendTimeData{false};
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Debug")
 	float DebugArrowLength{0.35f};
