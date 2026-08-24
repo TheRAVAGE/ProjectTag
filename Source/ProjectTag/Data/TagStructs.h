@@ -138,6 +138,9 @@ struct FDebugOptions
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Debug | Transition")
 	bool bShowTransitionBlendTimeData{false};
 	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Debug | Trajectory")
+	bool bShowTrajectoryVisuals{false};
+	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Debug")
 	float DebugArrowLength{0.35f};
 	
