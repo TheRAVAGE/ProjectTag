@@ -135,6 +135,9 @@ struct FDebugOptions
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Debug | Locomotion")
 	bool bShowCharacterLocomotionVisuals{false};
 	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Debug | Slide")
+	bool bShowCharacterSlideData{false};
+	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Debug | Transition")
 	bool bShowTransitionBlendTimeData{false};
 	
