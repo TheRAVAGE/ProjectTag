@@ -8,8 +8,21 @@
 #include "TagStructs.generated.h"
 
 enum class EMovementGait : uint8;
-
 #pragma region Player Settings
+#pragma region Player Camera Settings
+
+USTRUCT(BlueprintType)
+struct FPlayerCameraSettings
+{
+	GENERATED_BODY()
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Settings | Camera")
+	bool bAllowCameraMovementWithSpeed{true};
+};
+
+#pragma endregion Player Camera Settings
+
+#pragma region Player Control Settings
 
 USTRUCT(BlueprintType)
 struct FPlayerMovementControlSettings
@@ -36,6 +49,7 @@ struct FPlayerLookControlSettings
 	bool bIsLookInverted{false};
 };
 
+#pragma endregion Player Control Settings
 #pragma endregion Player Settings
 
 #pragma region Movement Values
@@ -107,16 +121,23 @@ struct FAnimationProperties
 	EMovementGait MovementGait{EMovementGait::E_Idle};
 	UPROPERTY(BlueprintReadOnly, Category="Animation Properties | Gait Data")
 	EMovementGait PreviousMovementGait{EMovementGait::E_Idle};
+	
 	//Stance Data
 	UPROPERTY(BlueprintReadOnly, Category="Animation Properties | Gait Data")
 	EMovementStance MovementStance{EMovementStance::E_None};
+	
+	//Aim Offset Data
+	UPROPERTY(BlueprintReadOnly, Category="Animation Properties | Aim Offset Data")
+	float AO_Yaw{0.f};
+	UPROPERTY(BlueprintReadOnly, Category="Animation Properties | Aim Offset Data")
+	float AO_Pitch{0.f};
 	
 	//Foot Placement
 	UPROPERTY(BlueprintReadOnly, Category="Animation Properties | Foot Placement")
 	float FootPlacementAlpha{0.0f};
 };
 
-#pragma endregion Movement Values
+#pragma endregion Animation Properties
 
 #pragma region Debug
 USTRUCT(BlueprintType)
@@ -140,6 +161,9 @@ struct FDebugOptions
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Debug | Transition")
 	bool bShowTransitionBlendTimeData{false};
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Debug | Transition")
+	bool bShowAimData{false};
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Debug | Trajectory")
 	bool bShowTrajectoryVisuals{false};

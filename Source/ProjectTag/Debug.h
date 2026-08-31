@@ -46,6 +46,7 @@ namespace Debug
 	
 	static void OneSlot_String(const UWorld* InWorld, const FName Title, const FString Message, const float Duration = -1.f, const FColor Color = FColor::MakeRandomColor(), const bool bLog = true)
 	{
+		if (!InWorld) {return;}
 		UKismetSystemLibrary::PrintString(
 			InWorld, 
 			FString::Printf(TEXT("%s: %s"), *Title.ToString(), *Message),
@@ -59,6 +60,7 @@ namespace Debug
 	
 	static void OneSlot_Bool(const UWorld* InWorld, const FName Title, const bool Value, const float Duration = -1.f, const FColor Color = FColor::MakeRandomColor(), const bool bLog = true)
 	{
+		if (!InWorld) {return;}
 		UKismetSystemLibrary::PrintString(
 			InWorld, 
 			FString::Printf(TEXT("%s: %s"), *Title.ToString(), *FString(Value? "true": "false")),
@@ -72,6 +74,7 @@ namespace Debug
 	
 	static void OneSlot_Float(const UWorld* InWorld, const FName Title, const float Value, const float Duration = -1.f, const FColor Color = FColor::MakeRandomColor(), const bool bLog = true)
 	{
+		if (!InWorld) {return;}
 		UKismetSystemLibrary::PrintString(
 			InWorld, 
 			FString::Printf(TEXT("%s: %f"), *Title.ToString(), Value),
@@ -85,6 +88,7 @@ namespace Debug
 	
 	static void OneSlot_Int(const UWorld* InWorld, const FName Title, const int32 Value, const float Duration = -1.f, const FColor Color = FColor::MakeRandomColor(), const bool bLog = true)
 	{
+		if (!InWorld) {return;}
 		UKismetSystemLibrary::PrintString(
 			InWorld, 
 			FString::Printf(TEXT("%s: %d"), *Title.ToString(), Value),
@@ -99,6 +103,7 @@ namespace Debug
 	template<typename TEnum>
 	static void OneSlot_Enum(const UWorld* InWorld, const FName Title, const TEnum Value, const float Duration = -1.f, const FColor Color = FColor::MakeRandomColor(), const bool bLog = true)
 	{
+		if (!InWorld) {return;}
 		static_assert(TIsEnum<TEnum>::Value, "OneSlot_Enum requires an enum type");
 		const UEnum* EnumPtr = StaticEnum<TEnum>();
 		check(EnumPtr);
@@ -117,6 +122,21 @@ namespace Debug
 	
 	static void OneSlot_Vector(const UWorld* InWorld, const FName Title, const FVector Value, const float Duration = -1.f, const FColor Color = FColor::MakeRandomColor(), const bool bLog = true)
 	{
+		if (!InWorld) {return;}
+		UKismetSystemLibrary::PrintString(
+			InWorld, 
+			FString::Printf(TEXT("%s: %s"), *Title.ToString(), *Value.ToCompactString()),
+			true, 
+			bLog,
+			Color, 
+			Duration, 
+			Title
+		);
+	}
+	
+	static void OneSlot_Rotator(const UWorld* InWorld, const FName Title, const FRotator Value, const float Duration = -1.f, const FColor Color = FColor::MakeRandomColor(), const bool bLog = true)
+	{
+		if (!InWorld) {return;}
 		UKismetSystemLibrary::PrintString(
 			InWorld, 
 			FString::Printf(TEXT("%s: %s"), *Title.ToString(), *Value.ToCompactString()),
@@ -134,6 +154,7 @@ namespace Debug
 	
 	static void OneSlotM_String(const UWorld* InWorld, const FName Title, const FString Message, const float Duration = -1.f, const FColor Color = FColor::MakeRandomColor(), const bool bLog = true)
 	{
+		if (!InWorld) {return;}
 		FName NewTitle = FName(FString::Printf(TEXT("%d - %s"),InWorld->GetUniqueID(),*Title.ToString()));
 		UKismetSystemLibrary::PrintString(
 			InWorld, 
@@ -148,6 +169,7 @@ namespace Debug
 	
 	static void OneSlotM_Bool(const UWorld* InWorld, const FName Title, const bool Value, const float Duration = -1.f, const FColor Color = FColor::MakeRandomColor(), const bool bLog = true)
 	{
+		if (!InWorld) {return;}
 		FName NewTitle = FName(FString::Printf(TEXT("%d - %s"),InWorld->GetUniqueID(),*Title.ToString()));
 		UKismetSystemLibrary::PrintString(
 			InWorld, 
@@ -162,6 +184,7 @@ namespace Debug
 	
 	static void OneSlotM_Float(const UWorld* InWorld, const FName Title, const float Value, const float Duration = -1.f, const FColor Color = FColor::MakeRandomColor(), const bool bLog = true)
 	{
+		if (!InWorld) {return;}
 		FName NewTitle = FName(FString::Printf(TEXT("%d - %s"),InWorld->GetUniqueID(),*Title.ToString()));
 		UKismetSystemLibrary::PrintString(
 			InWorld, 
@@ -176,6 +199,7 @@ namespace Debug
 	
 	static void OneSlotM_Int(const UWorld* InWorld, const FName Title, const int32 Value, const float Duration = -1.f, const FColor Color = FColor::MakeRandomColor(), const bool bLog = true)
 	{
+		if (!InWorld) {return;}
 		FName NewTitle = FName(FString::Printf(TEXT("%d - %s"),InWorld->GetUniqueID(),*Title.ToString()));
 		UKismetSystemLibrary::PrintString(
 			InWorld, 
@@ -191,6 +215,7 @@ namespace Debug
 	template<typename TEnum>
 	static void OneSlotM_Enum(const UWorld* InWorld, const FName Title, const TEnum Value, const float Duration = -1.f, const FColor Color = FColor::MakeRandomColor(), const bool bLog = true)
 	{
+		if (!InWorld) {return;}
 		static_assert(TIsEnum<TEnum>::Value, "OneSlot_Enum requires an enum type");
 		const UEnum* EnumPtr = StaticEnum<TEnum>();
 		check(EnumPtr);
@@ -210,6 +235,22 @@ namespace Debug
 	
 	static void OneSlotM_Vector(const UWorld* InWorld, const FName Title, const FVector Value, const float Duration = -1.f, const FColor Color = FColor::MakeRandomColor(), const bool bLog = true)
 	{
+		if (!InWorld) {return;}
+		FName NewTitle = FName(FString::Printf(TEXT("%d - %s"),InWorld->GetUniqueID(),*Title.ToString()));
+		UKismetSystemLibrary::PrintString(
+			InWorld, 
+			FString::Printf(TEXT("%s: %s"), *Title.ToString(), *Value.ToCompactString()),
+			true, 
+			bLog,
+			Color, 
+			Duration, 
+			NewTitle
+		);
+	}
+	
+	static void OneSlotM_Rotator(const UWorld* InWorld, const FName Title, const FRotator Value, const float Duration = -1.f, const FColor Color = FColor::MakeRandomColor(), const bool bLog = true)
+	{
+		if (!InWorld) {return;}
 		FName NewTitle = FName(FString::Printf(TEXT("%d - %s"),InWorld->GetUniqueID(),*Title.ToString()));
 		UKismetSystemLibrary::PrintString(
 			InWorld, 
@@ -228,6 +269,7 @@ namespace Debug
 	
 	static void DrawLine(const UWorld* InWorld, const FVector& LineStart, const FVector& LineEnd, const FColor& Color = FColor::MakeRandomColor(), const bool bPersistentLines = false, const float LifeTime = -1.f, const float Thickness = 1.f, const int32 DepthPriority = 0)
 	{
+		if (!InWorld) {return;}
 		DrawDebugLine( InWorld, 
 	LineStart, 
 	LineEnd, 
@@ -241,6 +283,7 @@ namespace Debug
 	
 	static void DrawSphere(const UWorld* InWorld, const FVector& Center, const float Radius = 10.f, const FColor& Color = FColor::MakeRandomColor(), const bool bPersistentLines = false, const float LifeTime = -1.f, const float Thickness = 1.f, const int32 DepthPriority = 0, const int32 Segments = 12)
 	{
+		if (!InWorld) {return;}
 		DrawDebugSphere(
 			InWorld,
 			Center,
@@ -256,6 +299,7 @@ namespace Debug
 	
 	static void DrawBox(const UWorld* InWorld, const FVector& Center, const FVector& Extent, const FColor& Color = FColor::MakeRandomColor(), const bool bPersistentLines = false, const float LifeTime = -1.f, const float Thickness = 1.f, const int32 DepthPriority = 0)
 	{
+		if (!InWorld) {return;}
 		DrawDebugBox(
 			InWorld,
 			Center,
@@ -270,6 +314,7 @@ namespace Debug
 	
 	static void DrawCapsule(const UWorld* InWorld, const FVector& Center, const float HalfHeight, const float Radius, const FQuat& Rotation = FQuat::Identity, const FColor& Color = FColor::MakeRandomColor(), const bool bPersistentLines = false, const float LifeTime = -1.f, const float Thickness = 1.f, const int32 DepthPriority = 0)
 	{
+		if (!InWorld) {return;}
 		DrawDebugCapsule(
 			InWorld,
 			Center,
@@ -286,6 +331,7 @@ namespace Debug
 	
 	static void DrawArrow(const UWorld* InWorld, const FVector& LineStart, const FVector& LineEnd, const float Thickness = 1.f,const FColor& Color = FColor::MakeRandomColor(), const bool bPersistentLines = false, const float LifeTime = -1.f,const float ArrowSize = 1.f, const int32 DepthPriority = 0)
 	{
+		if (!InWorld) {return;}
 		DrawDebugDirectionalArrow(
 			InWorld,
 			LineStart,
@@ -301,6 +347,7 @@ namespace Debug
 	
 	static void DrawString(const UWorld* InWorld, const FVector& TextLocation, const FString& Text, const float FontScale = 1.f, const FColor& Color = FColor::MakeRandomColor(), const bool bPersistentLines = false, const float LifeTime = 0.f, const int32 DepthPriority = 0)
 	{
+		if (!InWorld) {return;}
 		DrawDebugString(
 			InWorld,
 			TextLocation,
@@ -312,12 +359,27 @@ namespace Debug
 			FontScale
 		);
 	}
+	static void DrawPoint(const UWorld* InWorld, const FVector& Location, const float Size = 5.f, const FColor& Color = FColor::MakeRandomColor(), const bool bPersistentLines = false, const float LifeTime = 0.f, const int32 DepthPriority = 0)
+	{
+		if (!InWorld) {return;}
+		DrawDebugPoint(
+			InWorld,
+			Location, 
+			Size, 
+			Color, 
+			bPersistentLines, 
+			LifeTime, 
+			DepthPriority
+			);
+	}
 #pragma endregion Draw Debugs
-	
+		
 #pragma region Character Referenced Debug
 	static void DrawStringFromCharacter(const UWorld* InWorld, const ACharacter* Character,const FString Value, const FColor Color, const float OffSet)
 	{
 		if (!Character)	{return;}
+		if (!InWorld) {return;}
+		
 		const float HalfHeight = Character->GetCapsuleComponent()->GetScaledCapsuleHalfHeight();
 		const FVector Location = Character->GetActorLocation() + FVector{0.f,0.f,HalfHeight+OffSet};
 		Debug::DrawString(InWorld, Location, Value, 0.75f, Color);
@@ -326,6 +388,8 @@ namespace Debug
 	static void DrawArrowFromCharacter(const UWorld* InWorld, const APlayerCharacter* Character,const FString Name,const FVector Value, const float MaxValue, const FColor Color)
 	{
 		if (!Character)	{return;}
+		if (!InWorld) {return;}
+		
 		const float HalfHeight = Character->GetCapsuleComponent()->GetScaledCapsuleHalfHeight();
 		const FVector StartLocation = Character->GetActorLocation() - FVector{0.f,0.f,HalfHeight};
 		const float ValueMagnitude = Value.Size();
