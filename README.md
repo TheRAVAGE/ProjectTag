@@ -1,5 +1,5 @@
 
-# Project Tag [Placeholder Name]
+# Project Tag
 
 A multiplayer tag game where nobody's ever really out.
 
