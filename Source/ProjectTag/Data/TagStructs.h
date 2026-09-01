@@ -8,6 +8,7 @@
 #include "TagStructs.generated.h"
 
 enum class EMovementGait : uint8;
+
 #pragma region Player Settings
 #pragma region Player Camera Settings
 
@@ -80,7 +81,10 @@ struct FMovementConfig
 	float Volume = 0.f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Movement")
-	float AttenuationRadius = 0.f;
+	USoundConcurrency* SoundConcurrency = nullptr;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Movement")
+	USoundAttenuation* SoundAttenuation = nullptr;
 };
 
 USTRUCT(BlueprintType)
