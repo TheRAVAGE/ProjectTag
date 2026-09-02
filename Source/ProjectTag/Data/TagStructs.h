@@ -30,7 +30,7 @@ struct FPlayerMovementControlSettings
 {
 	GENERATED_BODY()
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Settings | Movement")
-	bool bIsRunToggle{false};
+	bool bIsSprintToggle{false};
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Settings | Movement")
 	bool bIsWalkToggle{false};
@@ -47,7 +47,10 @@ struct FPlayerLookControlSettings
 	float LookSensitivity{1.0f};
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Settings | Look")
-	bool bIsLookInverted{false};
+	bool bIsLookVerticalInverted{false};
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Settings | Look")
+	bool bIsLookHorizontalInverted{false};
 };
 
 #pragma endregion Player Control Settings
