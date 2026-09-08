@@ -7,6 +7,9 @@
 
 #include "TagStructs.generated.h"
 
+
+class ITraversalInterface;
+class ATraversableBase;
 enum class EMovementGait : uint8;
 
 #pragma region Player Settings
@@ -155,6 +158,9 @@ struct FDebugOptions
 	bool bShowDebugMessages{false};
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Debug | Locomotion")
+	bool bShowInputDeviceData{false};
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Debug | Locomotion")
 	bool bShowControlsData{false};
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Debug | Locomotion")
@@ -169,14 +175,86 @@ struct FDebugOptions
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Debug | Transition")
 	bool bShowTransitionBlendTimeData{false};
 	
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Debug | Transition")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Debug | Aim")
 	bool bShowAimData{false};
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Debug | Trajectory")
+	bool bShowMotionWarpingVisuals{false};
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Debug | Trajectory")
 	bool bShowTrajectoryVisuals{false};
 	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Debug | Traversal")
+	bool bShowTraversalData{false};
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Debug | Traversal | Points")
+	bool bShowTraversalPoints{false};
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Debug | Traversal | Points")
+	bool bShowTraversalTraces{false};
+	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Debug")
-	float DebugArrowLength{0.35f};
+	float DebugArrowLength{100.f};
 	
 };
 #pragma endregion Debug
+
+#pragma region Traversable Data
+
+USTRUCT(BlueprintType)
+struct FTraversalCheckResults
+{
+	GENERATED_BODY()
+	UPROPERTY(BlueprintReadWrite)
+	E_TraversableType TraversableType{E_TraversableType::E_None};
+	
+	UPROPERTY(BlueprintReadWrite)
+	float DistanceToTraversalObject{0.0f};
+	
+	UPROPERTY(BlueprintReadWrite)
+	bool bHasFrontLedge{false};
+	
+	UPROPERTY(BlueprintReadWrite)
+	FVector FrontLedgeLocation{FVector::ZeroVector};
+	
+	UPROPERTY(BlueprintReadWrite)
+	FVector FrontLedgeNormal{FVector::ZeroVector};
+	
+	UPROPERTY(BlueprintReadWrite)
+	bool bHasBackLedge{false};
+	
+	UPROPERTY(BlueprintReadWrite)
+	FVector BackLedgeLocation{FVector::ZeroVector};
+	
+	UPROPERTY(BlueprintReadWrite)
+	FVector BackLedgeNormal{FVector::ZeroVector};
+	
+	UPROPERTY(BlueprintReadWrite)
+	bool bHasBackFloor{false};
+	
+	UPROPERTY(BlueprintReadWrite)
+	FVector BackFloorLocation{FVector::ZeroVector};
+	
+	UPROPERTY(BlueprintReadWrite)
+	float ObstacleHeight{0.0f};
+	
+	UPROPERTY(BlueprintReadWrite)
+	float ObstacleDepth{0.0f};
+	
+	UPROPERTY(BlueprintReadWrite)
+	float BackLedgeHeight{0.0f};
+	
+	UPROPERTY(BlueprintReadWrite)
+	TObjectPtr<AActor> TraversalActor{nullptr};
+	
+	UPROPERTY(BlueprintReadWrite)
+	TObjectPtr<UAnimMontage> ChosenMontage;
+	
+	UPROPERTY(BlueprintReadWrite)
+	float StartTime{0.0f};
+	
+	UPROPERTY(BlueprintReadWrite)
+	float PlayRate{0.0f};
+};
+
+#pragma endregion Traversable Data

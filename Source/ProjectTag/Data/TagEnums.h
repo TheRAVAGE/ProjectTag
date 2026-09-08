@@ -44,3 +44,30 @@ enum class E_AnimMontageType : uint8
 	E_MAX UMETA(Hidden)
 };
 #pragma endregion Anim Montage
+
+#pragma region Input Device
+
+UENUM(BlueprintType)
+enum class E_InputDeviceType : uint8
+{
+	E_Unknown UMETA(DisplayName = "Unknown"),
+	E_Keyboard UMETA(DisplayName = "Keyboard"),
+	E_Gamepad UMETA(DisplayName = "Gamepad"),
+	E_MAX UMETA(Hidden)
+};
+#pragma endregion Input Device
+
+#pragma region Traversable
+
+UENUM(BlueprintType)
+enum class E_TraversableType : uint8
+{
+	E_None UMETA(DisplayName = "None"),
+	E_Hurdle UMETA(DisplayName = "Hurdle"),
+	E_Vault UMETA(DisplayName = "Vault"),
+	E_Mantle UMETA(DisplayName = "Mantle"),
+	E_Climb UMETA(DisplayName = "Climb"),
+	E_MAX UMETA(Hidden)
+};
+
+#pragma endregion Traversable

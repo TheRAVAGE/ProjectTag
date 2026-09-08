@@ -21,6 +21,7 @@ public class ProjectTag : ModuleRules
 			"MotionTrajectory",
 			"Chooser",
 			"PoseSearch",
+			"AnimationWarpingRuntime",
 		});
 
 		PrivateDependencyModuleNames.AddRange(new string[] {  });

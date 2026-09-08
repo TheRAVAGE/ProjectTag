@@ -270,20 +270,30 @@ namespace Debug
 	static void DrawLine(const UWorld* InWorld, const FVector& LineStart, const FVector& LineEnd, const FColor& Color = FColor::MakeRandomColor(), const bool bPersistentLines = false, const float LifeTime = -1.f, const float Thickness = 1.f, const int32 DepthPriority = 0)
 	{
 		if (!InWorld) {return;}
+		float ActualLifeTime = LifeTime;
+		if (!bPersistentLines)
+		{
+			ActualLifeTime = (LifeTime<1.f) ?  5.f : LifeTime;
+		}
 		DrawDebugLine( InWorld, 
-	LineStart, 
-	LineEnd, 
-	Color, 
-	bPersistentLines, 
-	LifeTime, 
-	DepthPriority, 
-	Thickness
-	);
+			LineStart, 
+			LineEnd, 
+			Color, 
+			bPersistentLines, 
+			ActualLifeTime, 
+			DepthPriority, 
+			Thickness
+		);
 	}
 	
 	static void DrawSphere(const UWorld* InWorld, const FVector& Center, const float Radius = 10.f, const FColor& Color = FColor::MakeRandomColor(), const bool bPersistentLines = false, const float LifeTime = -1.f, const float Thickness = 1.f, const int32 DepthPriority = 0, const int32 Segments = 12)
 	{
 		if (!InWorld) {return;}
+		float ActualLifeTime = LifeTime;
+		if (!bPersistentLines)
+		{
+			ActualLifeTime = (LifeTime<1.f) ?  5.f : LifeTime;
+		}
 		DrawDebugSphere(
 			InWorld,
 			Center,
@@ -291,7 +301,7 @@ namespace Debug
 			Segments,
 			Color,
 			bPersistentLines,
-			LifeTime,
+			ActualLifeTime,
 			DepthPriority,
 			Thickness
 		);
@@ -300,13 +310,18 @@ namespace Debug
 	static void DrawBox(const UWorld* InWorld, const FVector& Center, const FVector& Extent, const FColor& Color = FColor::MakeRandomColor(), const bool bPersistentLines = false, const float LifeTime = -1.f, const float Thickness = 1.f, const int32 DepthPriority = 0)
 	{
 		if (!InWorld) {return;}
+		float ActualLifeTime = LifeTime;
+		if (!bPersistentLines)
+		{
+			ActualLifeTime = (LifeTime<1.f) ?  5.f : LifeTime;
+		}
 		DrawDebugBox(
 			InWorld,
 			Center,
 			Extent,
 			Color,
 			bPersistentLines,
-			LifeTime,
+			ActualLifeTime,
 			DepthPriority,
 			Thickness
 		);
@@ -315,6 +330,11 @@ namespace Debug
 	static void DrawCapsule(const UWorld* InWorld, const FVector& Center, const float HalfHeight, const float Radius, const FQuat& Rotation = FQuat::Identity, const FColor& Color = FColor::MakeRandomColor(), const bool bPersistentLines = false, const float LifeTime = -1.f, const float Thickness = 1.f, const int32 DepthPriority = 0)
 	{
 		if (!InWorld) {return;}
+		float ActualLifeTime = LifeTime;
+		if (!bPersistentLines)
+		{
+			ActualLifeTime = (LifeTime<1.f) ?  5.f : LifeTime;
+		}
 		DrawDebugCapsule(
 			InWorld,
 			Center,
@@ -323,7 +343,7 @@ namespace Debug
 			Rotation,
 			Color,
 			bPersistentLines,
-			LifeTime,
+			ActualLifeTime,
 			DepthPriority,
 			Thickness
 		);
@@ -332,6 +352,11 @@ namespace Debug
 	static void DrawArrow(const UWorld* InWorld, const FVector& LineStart, const FVector& LineEnd, const float Thickness = 1.f,const FColor& Color = FColor::MakeRandomColor(), const bool bPersistentLines = false, const float LifeTime = -1.f,const float ArrowSize = 1.f, const int32 DepthPriority = 0)
 	{
 		if (!InWorld) {return;}
+		float ActualLifeTime = LifeTime;
+		if (!bPersistentLines)
+		{
+			ActualLifeTime = (LifeTime<1.f) ?  5.f : LifeTime;
+		}
 		DrawDebugDirectionalArrow(
 			InWorld,
 			LineStart,
@@ -339,7 +364,7 @@ namespace Debug
 			ArrowSize,
 			Color,
 			bPersistentLines,
-			LifeTime,
+			ActualLifeTime,
 			DepthPriority,
 			Thickness
 		);
@@ -348,13 +373,18 @@ namespace Debug
 	static void DrawString(const UWorld* InWorld, const FVector& TextLocation, const FString& Text, const float FontScale = 1.f, const FColor& Color = FColor::MakeRandomColor(), const bool bPersistentLines = false, const float LifeTime = 0.f, const int32 DepthPriority = 0)
 	{
 		if (!InWorld) {return;}
+		float ActualLifeTime = LifeTime;
+		if (!bPersistentLines)
+		{
+			ActualLifeTime = (LifeTime<1.f) ?  5.f : LifeTime;
+		}
 		DrawDebugString(
 			InWorld,
 			TextLocation,
 			Text,
 			nullptr,
 			Color,
-			LifeTime,
+			ActualLifeTime,
 			bPersistentLines,
 			FontScale
 		);
@@ -362,13 +392,18 @@ namespace Debug
 	static void DrawPoint(const UWorld* InWorld, const FVector& Location, const float Size = 5.f, const FColor& Color = FColor::MakeRandomColor(), const bool bPersistentLines = false, const float LifeTime = 0.f, const int32 DepthPriority = 0)
 	{
 		if (!InWorld) {return;}
+		float ActualLifeTime = LifeTime;
+		if (!bPersistentLines)
+		{
+			ActualLifeTime = (LifeTime<1.f) ?  5.f : LifeTime;
+		}
 		DrawDebugPoint(
 			InWorld,
 			Location, 
 			Size, 
 			Color, 
 			bPersistentLines, 
-			LifeTime, 
+			ActualLifeTime, 
 			DepthPriority
 			);
 	}
