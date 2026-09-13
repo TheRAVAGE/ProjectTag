@@ -40,6 +40,19 @@ namespace Debug
 		}
 	}
 	
+	static void PrintFunctionName(const FString& Message, const bool bLog = true)
+	{
+		const FString String = FString::Printf(TEXT("Called by : %s"), *Message);
+		if (GEngine)
+		{
+			GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::Purple, String);
+		}
+		if (bLog)
+		{
+			LogMsg(String);
+		}
+	}
+	
 #pragma endregion	Essential Logs
 	
 #pragma region One Slot Debugs
@@ -267,7 +280,7 @@ namespace Debug
 	
 #pragma region Draw Debugs
 	
-	static void DrawLine(const UWorld* InWorld, const FVector& LineStart, const FVector& LineEnd, const FColor& Color = FColor::MakeRandomColor(), const bool bPersistentLines = false, const float LifeTime = -1.f, const float Thickness = 1.f, const int32 DepthPriority = 0)
+	static void DrawLine(const UWorld* InWorld, const FVector& LineStart, const FVector& LineEnd, const FColor& Color = FColor::MakeRandomColor(), const bool bOneShot = false, const bool bPersistentLines = false, const float LifeTime = -1.f, const float Thickness = 1.f, const int32 DepthPriority = 0)
 	{
 		if (!InWorld) {return;}
 		float ActualLifeTime = LifeTime;
@@ -280,13 +293,13 @@ namespace Debug
 			LineEnd, 
 			Color, 
 			bPersistentLines, 
-			ActualLifeTime, 
+			bOneShot? 0.f: ActualLifeTime, 
 			DepthPriority, 
 			Thickness
 		);
 	}
 	
-	static void DrawSphere(const UWorld* InWorld, const FVector& Center, const float Radius = 10.f, const FColor& Color = FColor::MakeRandomColor(), const bool bPersistentLines = false, const float LifeTime = -1.f, const float Thickness = 1.f, const int32 DepthPriority = 0, const int32 Segments = 12)
+	static void DrawSphere(const UWorld* InWorld, const FVector& Center, const float Radius = 10.f, const FColor& Color = FColor::MakeRandomColor(), const bool bOneShot = false, const bool bPersistentLines = false, const float LifeTime = -1.f, const float Thickness = 1.f, const int32 DepthPriority = 0, const int32 Segments = 12)
 	{
 		if (!InWorld) {return;}
 		float ActualLifeTime = LifeTime;
@@ -301,13 +314,13 @@ namespace Debug
 			Segments,
 			Color,
 			bPersistentLines,
-			ActualLifeTime,
+			bOneShot? 0.f: ActualLifeTime,
 			DepthPriority,
 			Thickness
 		);
 	}
 	
-	static void DrawBox(const UWorld* InWorld, const FVector& Center, const FVector& Extent, const FColor& Color = FColor::MakeRandomColor(), const bool bPersistentLines = false, const float LifeTime = -1.f, const float Thickness = 1.f, const int32 DepthPriority = 0)
+	static void DrawBox(const UWorld* InWorld, const FVector& Center, const FVector& Extent, const FColor& Color = FColor::MakeRandomColor(), const bool bOneShot = false, const bool bPersistentLines = false, const float LifeTime = -1.f, const float Thickness = 1.f, const int32 DepthPriority = 0)
 	{
 		if (!InWorld) {return;}
 		float ActualLifeTime = LifeTime;
@@ -321,13 +334,13 @@ namespace Debug
 			Extent,
 			Color,
 			bPersistentLines,
-			ActualLifeTime,
+			bOneShot? 0.f: ActualLifeTime,
 			DepthPriority,
 			Thickness
 		);
 	}
 	
-	static void DrawCapsule(const UWorld* InWorld, const FVector& Center, const float HalfHeight, const float Radius, const FQuat& Rotation = FQuat::Identity, const FColor& Color = FColor::MakeRandomColor(), const bool bPersistentLines = false, const float LifeTime = -1.f, const float Thickness = 1.f, const int32 DepthPriority = 0)
+	static void DrawCapsule(const UWorld* InWorld, const FVector& Center, const float HalfHeight, const float Radius, const FQuat& Rotation = FQuat::Identity, const FColor& Color = FColor::MakeRandomColor(), const bool bOneShot = false, const bool bPersistentLines = false, const float LifeTime = -1.f, const float Thickness = 1.f, const int32 DepthPriority = 0)
 	{
 		if (!InWorld) {return;}
 		float ActualLifeTime = LifeTime;
@@ -343,13 +356,13 @@ namespace Debug
 			Rotation,
 			Color,
 			bPersistentLines,
-			ActualLifeTime,
+			bOneShot? 0.f: ActualLifeTime,
 			DepthPriority,
 			Thickness
 		);
 	}
 	
-	static void DrawArrow(const UWorld* InWorld, const FVector& LineStart, const FVector& LineEnd, const float Thickness = 1.f,const FColor& Color = FColor::MakeRandomColor(), const bool bPersistentLines = false, const float LifeTime = -1.f,const float ArrowSize = 1.f, const int32 DepthPriority = 0)
+	static void DrawArrow(const UWorld* InWorld, const FVector& LineStart, const FVector& LineEnd, const float Thickness = 1.f,const FColor& Color = FColor::MakeRandomColor(), const bool bOneShot = false, const bool bPersistentLines = false, const float LifeTime = -1.f,const float ArrowSize = 1.f, const int32 DepthPriority = 0)
 	{
 		if (!InWorld) {return;}
 		float ActualLifeTime = LifeTime;
@@ -364,13 +377,13 @@ namespace Debug
 			ArrowSize,
 			Color,
 			bPersistentLines,
-			ActualLifeTime,
+			bOneShot? 0.f: ActualLifeTime,
 			DepthPriority,
 			Thickness
 		);
 	}
 	
-	static void DrawString(const UWorld* InWorld, const FVector& TextLocation, const FString& Text, const float FontScale = 1.f, const FColor& Color = FColor::MakeRandomColor(), const bool bPersistentLines = false, const float LifeTime = 0.f, const int32 DepthPriority = 0)
+	static void DrawString(const UWorld* InWorld, const FVector& TextLocation, const FString& Text, const float FontScale = 1.f, const FColor& Color = FColor::MakeRandomColor(), const bool bOneShot = false, const bool bPersistentLines = false, const float LifeTime = -1.f, const int32 DepthPriority = 0)
 	{
 		if (!InWorld) {return;}
 		float ActualLifeTime = LifeTime;
@@ -384,12 +397,12 @@ namespace Debug
 			Text,
 			nullptr,
 			Color,
-			ActualLifeTime,
+			bOneShot? 0.f: ActualLifeTime,
 			bPersistentLines,
 			FontScale
 		);
 	}
-	static void DrawPoint(const UWorld* InWorld, const FVector& Location, const float Size = 5.f, const FColor& Color = FColor::MakeRandomColor(), const bool bPersistentLines = false, const float LifeTime = 0.f, const int32 DepthPriority = 0)
+	static void DrawPoint(const UWorld* InWorld, const FVector& Location, const float Size = 5.f, const FColor& Color = FColor::MakeRandomColor(), const bool bOneShot = false, const bool bPersistentLines = false, const float LifeTime = -1.f, const int32 DepthPriority = 0)
 	{
 		if (!InWorld) {return;}
 		float ActualLifeTime = LifeTime;
@@ -403,7 +416,7 @@ namespace Debug
 			Size, 
 			Color, 
 			bPersistentLines, 
-			ActualLifeTime, 
+			bOneShot? 0.f: ActualLifeTime, 
 			DepthPriority
 			);
 	}
@@ -417,7 +430,7 @@ namespace Debug
 		
 		const float HalfHeight = Character->GetCapsuleComponent()->GetScaledCapsuleHalfHeight();
 		const FVector Location = Character->GetActorLocation() + FVector{0.f,0.f,HalfHeight+OffSet};
-		Debug::DrawString(InWorld, Location, Value, 0.75f, Color);
+		Debug::DrawString(InWorld, Location, Value, 0.75f, Color, true);
 	}
 
 	static void DrawArrowFromCharacter(const UWorld* InWorld, const APlayerCharacter* Character,const FString Name,const FVector Value, const float MaxValue, const FColor Color)
@@ -439,8 +452,8 @@ namespace Debug
 		const FVector EndLocation =
 			StartLocation + Direction * ArrowLength;
 	
-		Debug::DrawString(InWorld, EndLocation, Name, 0.75f, Color);
-		Debug::DrawArrow(InWorld, StartLocation, EndLocation,3.f,Color);
+		Debug::DrawString(InWorld, EndLocation, Name, 0.75f, Color, true);
+		Debug::DrawArrow(InWorld, StartLocation, EndLocation,3.f,Color, true);
 	}
 	
 #pragma endregion Character Referenced Debug

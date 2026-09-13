@@ -5,6 +5,33 @@
 #include "CoreMinimal.h"
 #include "TagEnums.generated.h"
 
+#pragma region Input Device
+
+UENUM(BlueprintType)
+enum class E_InputDeviceType : uint8
+{
+	E_Unknown UMETA(DisplayName = "Unknown"),
+	E_Keyboard UMETA(DisplayName = "Keyboard"),
+	E_Gamepad UMETA(DisplayName = "Gamepad"),
+	E_MAX UMETA(Hidden)
+};
+#pragma endregion Input Device
+
+#pragma region Player Types
+
+#pragma region Role Enums
+
+UENUM(BlueprintType)
+enum class ERoleType : uint8
+{
+	E_None UMETA(DisplayName = "None"),
+	E_Runner UMETA(DisplayName = "Runner"),
+	E_Catcher UMETA(DisplayName = "Catcher"),
+	E_MAX UMETA(Hidden)
+};
+
+#pragma endregion Role Enums
+
 #pragma region Movement Enums
 
 UENUM(BlueprintType)
@@ -34,29 +61,6 @@ enum class EMovementStance : uint8
 
 #pragma endregion Movement Enums
 
-#pragma region Anim Montage
-
-UENUM(BlueprintType)
-enum class E_AnimMontageType : uint8
-{
-	E_None UMETA(DisplayName = "None"),
-	E_IdleBreak UMETA(DisplayName = "Idle Break"),
-	E_MAX UMETA(Hidden)
-};
-#pragma endregion Anim Montage
-
-#pragma region Input Device
-
-UENUM(BlueprintType)
-enum class E_InputDeviceType : uint8
-{
-	E_Unknown UMETA(DisplayName = "Unknown"),
-	E_Keyboard UMETA(DisplayName = "Keyboard"),
-	E_Gamepad UMETA(DisplayName = "Gamepad"),
-	E_MAX UMETA(Hidden)
-};
-#pragma endregion Input Device
-
 #pragma region Traversable
 
 UENUM(BlueprintType)
@@ -71,3 +75,5 @@ enum class E_TraversableType : uint8
 };
 
 #pragma endregion Traversable
+
+#pragma endregion Player Types

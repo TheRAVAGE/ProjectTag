@@ -187,6 +187,9 @@ struct FDebugOptions
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Debug | Traversal")
 	bool bShowTraversalData{false};
 	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Debug | Traversal")
+	bool bShowTraversalMontageData{false};
+	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Debug | Traversal | Points")
 	bool bShowTraversalPoints{false};
 	
