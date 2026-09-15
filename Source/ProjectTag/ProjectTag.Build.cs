@@ -22,6 +22,7 @@ public class ProjectTag : ModuleRules
 			"Chooser",
 			"PoseSearch",
 			"AnimationWarpingRuntime",
+			"ChaosClothAssetEngine",
 		});
 
 		PrivateDependencyModuleNames.AddRange(new string[] {  });

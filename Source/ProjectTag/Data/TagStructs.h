@@ -59,6 +59,8 @@ struct FPlayerLookControlSettings
 #pragma endregion Player Control Settings
 #pragma endregion Player Settings
 
+#pragma region Player Types
+
 #pragma region Movement Values
 
 USTRUCT(BlueprintType)
@@ -149,59 +151,6 @@ struct FAnimationProperties
 
 #pragma endregion Animation Properties
 
-#pragma region Debug
-USTRUCT(BlueprintType)
-struct FDebugOptions
-{
-	GENERATED_BODY()
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Debug")
-	bool bShowDebugMessages{false};
-	
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Debug | Locomotion")
-	bool bShowInputDeviceData{false};
-	
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Debug | Locomotion")
-	bool bShowControlsData{false};
-	
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Debug | Locomotion")
-	bool bShowCharacterLocomotionData{false};
-	
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Debug | Locomotion")
-	bool bShowCharacterLocomotionVisuals{false};
-	
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Debug | Slide")
-	bool bShowCharacterSlideData{false};
-	
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Debug | Transition")
-	bool bShowTransitionBlendTimeData{false};
-	
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Debug | Aim")
-	bool bShowAimData{false};
-	
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Debug | Trajectory")
-	bool bShowMotionWarpingVisuals{false};
-	
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Debug | Trajectory")
-	bool bShowTrajectoryVisuals{false};
-	
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Debug | Traversal")
-	bool bShowTraversalData{false};
-	
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Debug | Traversal")
-	bool bShowTraversalMontageData{false};
-	
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Debug | Traversal | Points")
-	bool bShowTraversalPoints{false};
-	
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Debug | Traversal | Points")
-	bool bShowTraversalTraces{false};
-	
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Debug")
-	float DebugArrowLength{100.f};
-	
-};
-#pragma endregion Debug
-
 #pragma region Traversable Data
 
 USTRUCT(BlueprintType)
@@ -261,3 +210,87 @@ struct FTraversalCheckResults
 };
 
 #pragma endregion Traversable Data
+
+#pragma region Role Specifics
+
+USTRUCT(BlueprintType)
+struct FRoleValues
+{
+	GENERATED_BODY()
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Role Data | Movement")
+	float MovementSpeedMultiplier{0.0f};
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Role Data | Traversal")
+	float TraversalPlayrateMultiplier{0.0f};
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Role Data | Traversal")
+	float ReturnControlTimer{0.0f};
+	
+	// UPROPERTY(BlueprintReadWrite, Category = "Role Data | GameplayAbilities")
+	// TArray<>;
+	//
+};
+
+#pragma endregion Role Specifics
+
+#pragma endregion Player Types
+
+#pragma region Debug
+USTRUCT(BlueprintType)
+struct FDebugOptions
+{
+	GENERATED_BODY()
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Debug")
+	bool bShowDebugMessages{false};
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Debug | Locomotion")
+	bool bShowInputDeviceData{false};
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Debug | Locomotion")
+	bool bShowControlsData{false};
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Debug | Locomotion")
+	bool bShowCharacterLocomotionData{false};
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Debug | Locomotion")
+	bool bShowCharacterLocomotionVisuals{false};
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Debug | Slide")
+	bool bShowCharacterSlideData{false};
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Debug | Transition")
+	bool bShowTransitionBlendTimeData{false};
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Debug | Aim")
+	bool bShowAimData{false};
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Debug | Trajectory")
+	bool bShowMotionWarpingVisuals{false};
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Debug | Trajectory")
+	bool bShowTrajectoryVisuals{false};
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Debug | Traversal")
+	bool bShowTraversalData{false};
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Debug | Traversal")
+	bool bShowTraversalMontageData{false};
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Debug | Traversal | Points")
+	bool bShowTraversalPoints{false};
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Debug | Traversal | Points")
+	bool bShowTraversalTraces{false};
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Debug | Role")
+	bool bShowRoleData{false};
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Debug | Role")
+	bool bShowRoleVisuals{false};
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Debug")
+	float DebugArrowLength{100.f};
+	
+};
+#pragma endregion Debug
