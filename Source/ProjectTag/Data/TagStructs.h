@@ -13,6 +13,19 @@ class ATraversableBase;
 enum class EMovementGait : uint8;
 
 #pragma region Player Settings
+
+#pragma region Player Graphics
+USTRUCT(BlueprintType)
+struct FPlayerGraphicsSettings
+{
+	GENERATED_BODY()
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Settings | Camera")
+	bool bShowParticleEffect{true};
+};
+
+#pragma endregion Player Graphics
+
 #pragma region Player Camera Settings
 
 USTRUCT(BlueprintType)
@@ -232,6 +245,18 @@ struct FRoleValues
 	//
 };
 
+USTRUCT(BlueprintType)
+struct FRoleAssignment
+{
+	GENERATED_BODY()
+	
+	UPROPERTY(BlueprintReadWrite)
+	ERoleType CurrentRole{ERoleType::E_None};
+	
+	UPROPERTY(BlueprintReadWrite)
+	bool bShouldStartTimer{true};
+};
+
 #pragma endregion Role Specifics
 
 #pragma endregion Player Types
@@ -288,6 +313,9 @@ struct FDebugOptions
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Debug | Role")
 	bool bShowRoleVisuals{false};
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Debug | Role")
+	bool bShowRoleTimelineMessages{false};
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Debug")
 	float DebugArrowLength{100.f};
