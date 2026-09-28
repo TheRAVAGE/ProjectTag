@@ -52,6 +52,24 @@ namespace Debug
 			LogMsg(String);
 		}
 	}
+	static void OneSlot_FunctionName(const UWorld* InWorld, const FString& Message, const float Duration = 5.f,const bool bLog = true)
+	{
+		const FString String = FString::Printf(TEXT("Called by : %s"), *Message);
+		if (!InWorld) {return;}
+		UKismetSystemLibrary::PrintString(
+			InWorld, 
+			FString::Printf(TEXT("%s"), *String),
+			true, 
+			bLog,
+			FColor::Purple, 
+			Duration, 
+			FName(String)
+		);
+		if (bLog)
+		{
+			LogMsg(String);
+		}
+	}
 	
 #pragma endregion	Essential Logs
 	

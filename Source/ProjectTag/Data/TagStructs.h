@@ -8,6 +8,7 @@
 #include "TagStructs.generated.h"
 
 
+class UGameplayAbilityBase;
 class ITraversalInterface;
 class ATraversableBase;
 enum class EMovementGait : uint8;
@@ -16,28 +17,84 @@ enum class EMovementGait : uint8;
 
 #pragma region Player Graphics
 USTRUCT(BlueprintType)
-struct FPlayerGraphicsSettings
+struct FPlayerGraphicsLevels
 {
 	GENERATED_BODY()
 	
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Settings | Camera")
-	bool bShowParticleEffect{true};
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Settings | Graphics")
+	int32 OverallQuality{4};
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Settings | Graphics")
+	int32 MaterialQuality{4};
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Settings | Graphics")
+	int32 ParticleQuality{4};
+	
+	int32 MatchOverallQuality(const int32 newLevel)
+	{
+		if (newLevel > OverallQuality)
+		{
+			OverallQuality = newLevel;
+		}
+		return FMath::Clamp(newLevel,0,OverallQuality);
+	}
+	void OverallQualityChanged()
+	{
+		//Add all the new audio settings here
+		ParticleQuality = FMath::Clamp(ParticleQuality,0,OverallQuality);
+		MaterialQuality = FMath::Clamp(MaterialQuality,0,OverallQuality);
+	}
 };
 
 #pragma endregion Player Graphics
 
-#pragma region Player Camera Settings
+#pragma region Player Audio
+USTRUCT(BlueprintType)
+struct FPlayerAudioLevels
+{
+	GENERATED_BODY()
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Settings | Camera")
+	float MasterAudio{1.0f};
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Settings | Camera")
+	float ParticleEffectAudio{1.0f};
+	
+	float MatchMasterAudio(const float newAudioLevel)
+	{
+		if (newAudioLevel > MasterAudio)
+		{
+			MasterAudio = newAudioLevel;
+		}
+		return FMath::Clamp(newAudioLevel,0.0f,MasterAudio);
+	}
+	void MasterAudioChanged()
+	{
+		//Add all the new audio settings here
+		ParticleEffectAudio = FMath::Clamp(ParticleEffectAudio,0.0f,MasterAudio);
+	}
+};
+
+#pragma endregion Player Audio
+
+#pragma region Player Gameplay Settings
 
 USTRUCT(BlueprintType)
-struct FPlayerCameraSettings
+struct FPlayerGameplaySettings
 {
 	GENERATED_BODY()
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Settings | Camera")
 	bool bAllowCameraMovementWithSpeed{true};
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Settings | Catch Marker")
+	FLinearColor CatchMarker_Can{FLinearColor::Yellow};
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Settings | Catch Marker")
+	FLinearColor CatchMarker_Cannot{FLinearColor::White};
 };
 
-#pragma endregion Player Camera Settings
+#pragma endregion Player Gameplay Settings
 
 #pragma region Player Control Settings
 
@@ -240,9 +297,9 @@ struct FRoleValues
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Role Data | Traversal")
 	float ReturnControlTimer{0.0f};
 	
-	// UPROPERTY(BlueprintReadWrite, Category = "Role Data | GameplayAbilities")
-	// TArray<>;
-	//
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Role Data | GameplayAbilities")
+	TObjectPtr<UGameplayAbilityBase> PrimaryActionAbility;
+	
 };
 
 USTRUCT(BlueprintType)
@@ -316,6 +373,13 @@ struct FDebugOptions
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Debug | Role")
 	bool bShowRoleTimelineMessages{false};
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Debug | Catcher")
+	bool bShowCatchCheckTraces{false};
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Debug | Catcher")
+	bool bShowCatchCheckVisuals{false};
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Debug | Catcher")
+	bool bShowCatchCheckData{false};
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Debug")
 	float DebugArrowLength{100.f};
