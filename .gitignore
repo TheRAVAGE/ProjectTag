@@ -5,6 +5,7 @@ Intermediate/
 Saved/
 .vscode/
 .idea/
+.diversion/
 
 # Ignore everything under Content
 Content/**
@@ -26,7 +27,13 @@ Content/**
 *.VC.db
 *.VC.opendb
 *.vsconfig
+*.dvignore
 
 # Ignore config files that shouldn't be shared
 Config/DefaultEditor.ini
 Config/DefaultEditorPerProjectUserSettings.ini
+CLAUDE.md
+AGENTS.md
+/Build/Windows/FileOpenOrder
+/Build/Windows/FileOpenOrder
+*.log

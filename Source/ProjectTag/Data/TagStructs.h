@@ -8,6 +8,7 @@
 #include "TagStructs.generated.h"
 
 
+class UDataAsset_AbilitySet;
 class UGameplayAbilityBase;
 class ITraversalInterface;
 class ATraversableBase;
@@ -298,7 +299,7 @@ struct FRoleValues
 	float ReturnControlTimer{0.0f};
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Role Data | GameplayAbilities")
-	TObjectPtr<UGameplayAbilityBase> PrimaryActionAbility;
+	TObjectPtr<UDataAsset_AbilitySet> AbilitySet{nullptr};
 	
 };
 
