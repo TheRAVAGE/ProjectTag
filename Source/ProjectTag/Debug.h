@@ -293,6 +293,25 @@ namespace Debug
 			NewTitle
 		);
 	}
+	static void OneSlotM_FunctionName(const UWorld* InWorld, const FString& Message, const float Duration = 5.f,const bool bLog = true)
+	{		
+		const FString String = FString::Printf(TEXT("Called by : %s"), *Message);
+		FName NewTitle = FName(FString::Printf(TEXT("%d - %s"),InWorld->GetUniqueID(),*String));
+		if (!InWorld) {return;}
+		UKismetSystemLibrary::PrintString(
+			InWorld, 
+			FString::Printf(TEXT("%s"), *String),
+			true, 
+			bLog,
+			FColor::Purple, 
+			Duration, 
+			NewTitle
+		);
+		if (bLog)
+		{
+			LogMsg(String);
+		}
+	}
 	
 #pragma endregion One Slot Debugs Multiplayer
 	

@@ -350,28 +350,22 @@ struct FDebugOptions
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Debug | Trajectory")
 	bool bShowMotionWarpingVisuals{false};
-	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Debug | Trajectory")
 	bool bShowTrajectoryVisuals{false};
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Debug | Traversal")
 	bool bShowTraversalData{false};
-	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Debug | Traversal")
 	bool bShowTraversalMontageData{false};
-	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Debug | Traversal | Points")
 	bool bShowTraversalPoints{false};
-	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Debug | Traversal | Points")
 	bool bShowTraversalTraces{false};
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Debug | Role")
 	bool bShowRoleData{false};
-	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Debug | Role")
 	bool bShowRoleVisuals{false};
-	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Debug | Role")
 	bool bShowRoleTimelineMessages{false};
 	
@@ -381,6 +375,8 @@ struct FDebugOptions
 	bool bShowCatchCheckVisuals{false};
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Debug | Catcher")
 	bool bShowCatchCheckData{false};
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Debug | Catcher")
+	bool bShowServerCatchTargetVisuals{false};
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Debug")
 	float DebugArrowLength{100.f};

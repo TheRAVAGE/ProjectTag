@@ -34,6 +34,5 @@ Config/DefaultEditor.ini
 Config/DefaultEditorPerProjectUserSettings.ini
 CLAUDE.md
 AGENTS.md
-/Build/Windows/FileOpenOrder
-/Build/Windows/FileOpenOrder
 *.log
+/Build/Windows/FileOpenOrder
