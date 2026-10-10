@@ -25,6 +25,7 @@ public class ProjectTag : ModuleRules
 			"AnimationWarpingRuntime",
 			"ChaosClothAssetEngine",
 			"Niagara",
+			"PhysicsControl",
 		});
 
 		PrivateDependencyModuleNames.AddRange(new string[] { });

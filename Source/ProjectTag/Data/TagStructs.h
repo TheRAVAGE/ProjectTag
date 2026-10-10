@@ -365,6 +365,8 @@ struct FDebugOptions
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Debug | Role")
 	bool bShowRoleData{false};
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Debug | Role")
+	bool bShowRoleChangeImmunityData{false};
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Debug | Role")
 	bool bShowRoleVisuals{false};
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Debug | Role")
 	bool bShowRoleTimelineMessages{false};
