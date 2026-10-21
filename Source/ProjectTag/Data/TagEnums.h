@@ -101,3 +101,20 @@ enum class E_TraversableType : uint8
 #pragma endregion Traversable
 
 #pragma endregion Player Types
+
+#pragma region Match Types
+
+UENUM(BlueprintType)
+enum class E_MatchType : uint8
+{
+	E_NotStarted UMETA(DisplayName = "Not Started"),
+	E_Started UMETA(DisplayName = "Started"),
+	E_RoleAssign UMETA(DisplayName = "Role Assign"),
+	E_StartWaitTime UMETA(DisplayName = "Start Wait Time"),
+	E_MatchActive UMETA(DisplayName = "Match Active"),
+	E_MatchTimerEnded UMETA(DisplayName = "Match Timer Ended"),
+	E_MatchEnded UMETA(DisplayName = "Match Ended"),
+	E_MAX UMETA(Hidden)
+};
+
+#pragma endregion Match Types

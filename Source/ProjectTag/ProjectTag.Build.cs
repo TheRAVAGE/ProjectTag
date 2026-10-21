@@ -26,9 +26,12 @@ public class ProjectTag : ModuleRules
 			"ChaosClothAssetEngine",
 			"Niagara",
 			"PhysicsControl",
+			"NetCore",
+			"Slate",
+			"SlateCore",
 		});
 
-		PrivateDependencyModuleNames.AddRange(new string[] { });
+		PrivateDependencyModuleNames.AddRange(new string[] {  });
 
 		// Uncomment if you are using Slate UI
 		// PrivateDependencyModuleNames.AddRange(new string[] { "Slate", "SlateCore" });

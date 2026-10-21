@@ -380,6 +380,9 @@ struct FDebugOptions
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Debug | Catcher")
 	bool bShowServerCatchTargetVisuals{false};
 	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Debug | Match Timer")
+	bool bShowMatchTimerData{false};
+	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Debug")
 	float DebugArrowLength{100.f};
 	
