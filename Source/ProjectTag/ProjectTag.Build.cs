@@ -29,6 +29,7 @@ public class ProjectTag : ModuleRules
 			"NetCore",
 			"Slate",
 			"SlateCore",
+			"DeveloperSettings",
 		});
 
 		PrivateDependencyModuleNames.AddRange(new string[] {  });

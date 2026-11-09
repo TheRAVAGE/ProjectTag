@@ -12,7 +12,9 @@
 				"Engine",
 				"GameplayAbilities",
 				"MotionTrajectory",
-				"UMG"
+				"UMG",
+				"CoreUObject",
+				"DeveloperSettings"
 			]
 		}
 	],
